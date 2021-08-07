@@ -7,13 +7,15 @@ defmodule FizzBuzz do
 
   defp handle_file_read({:ok, result}) do
     result =
-    result
-    |> String.split(",")
-    |> Enum.map(&convert_and_valuate_numbers/1)
+      result
+      |> String.split(",")
+      |> Enum.map(&convert_and_valuate_numbers/1)
+
     {:ok, result}
   end
 
-  defp handle_file_read({:error, msg}), do: {:error , "Não foi possivel ler o arquivo. Menssage #{msg}"}
+  defp handle_file_read({:error, msg}),
+    do: {:error, "Unable to read file. Menssage #{msg}"}
 
   defp convert_and_valuate_numbers(elem) do
     elem
@@ -21,8 +23,8 @@ defmodule FizzBuzz do
     |> evaluate_number()
   end
 
-  defp evaluate_number(number) when rem(number, 3) === 0 and rem(number, 5) === 0,  do: :fizzbuzz
-  defp evaluate_number(number) when rem(number, 5) === 0,  do: :buzz
-  defp evaluate_number(number) when rem(number, 3) === 0,  do: :fizz
+  defp evaluate_number(number) when rem(number, 3) === 0 and rem(number, 5) === 0, do: :fizzbuzz
+  defp evaluate_number(number) when rem(number, 5) === 0, do: :buzz
+  defp evaluate_number(number) when rem(number, 3) === 0, do: :fizz
   defp evaluate_number(number), do: number
 end
